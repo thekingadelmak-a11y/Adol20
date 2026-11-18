@@ -1,67 +1,15 @@
-☀️
-🔥 آخر الأخبار
-Free Rdp أمتلك جهازك مجانا وبطريقة شرعيه 2027
-كيفية إعداد بيئة عمل سحابية (RDP) باستخدام Tailscale و GitHub
-ملايين السيرفرات RDP unlimited مجانا وبحساب واحد هدية للمتابعين
-استمتع الان اكثر من 32 من العاب الزمن الجميل تحميل بضغطة زر من ميديا فير Games 2025
-تحديث يوتيوب لعام 2025: سياسة جديدة تجاه محتوى الذكاء الاصطناعي
-حدث كبير داخل سنترال رمسيس القاهرة في مجال الاتصالات
-استراتيجية الربح من اليوتيوب | صناعة محتوي كرتون بالذكاء الاصطناعي 2025
-Araby.ai: أفضل موقع ذكاء اصطناعي لإنشاء صور باللغة العربية لتعزيز إنتاجيتك
-الرئيسية
-›
-WindowsApp
-كيفية إعداد بيئة عمل سحابية (RDP) باستخدام Tailscale و GitHub
-📅
-٢٣ مايو ٢٠٢٦ في ١٢:٠٦ ص
-⏱ ٤ دقيقة قراءة
-WindowsApp
-📑 محتويات المقال
-ما سنحتاج لتطبيق هذا الشرح 
-ما هو موقع tailscale؟
-فيديو الشرح التطبيقي
-البحث في مواضيع كيف تجلب rdp مجاني للاستخدام حتي وان كان لفتره تجريبية كثر جدا ورغم ان هناك العديد من الطرق الا ان يظل github هو وسيله مفضله لاستخدامك للrdp.
-اليوم جئت لكم بطريقة سهلا مع شرح وافي لكيفية عمل بيئة سحابية ممتازه واستخدام هذا الحاسوب في تعلم البرمجه والتطوير.
-
-
-
-
-
-
-ما سنحتاج لتطبيق هذا الشرح 
-من الضروري الفهم ان هناك طرق شرعية واخري غير شرعية واليوم سنتحدث عن طريقة شرعية بحيث ان يستفاد الجميع بطريقة التشغيل والعمل علي هذه البيئة التي نريد إنشائها اليوم ولهذا سوف نعمل علي عده طرق 
-إنشاء حساب outlook
-إنشاء حساب github
-انشاء حساب tailscale 
-لماذا outlook
-في المقام الاول عند انشاء اي من الاميلات نحتاج الي موقع بريد موثوق ومميز لضمان ان هذه الرسائل لا تسرب وتحافظ علي بيناتنا الخاصة وهي ما نريد ان نعمل عليه اليوم للعمل الصحيح لابد من العمل الجيد 
-هل العمل علي github هو أمان؟
-نعم العمل في هذا الموقع الجبار هو أمان تام لاننا ننشئ الحساب بحماية مثل الباسورد احظرك ان تشارك هذا الباسورد مع احد.
-وإيضا لان هذه الطريقة لا تعمل الا بأستخدام github
-
-ما هو موقع tailscale؟
-منصة Tailscale هي خدمة متطورة تُستخدم لإنشاء شبكات افتراضية خاصة وآمنة (VPN) تعتمد على بروتوكول WireGuard الشهير والمشفر.
-آلية العمل: تتيح لك الخدمة ربط أجهزتك وسيرفراتك السحابية ببعضها البعض ومشاركتها في شبكة داخلية واحدة ومغلقة، حتى وإن كانت في أماكن مختلفة حول العالم.
-الميزة الأساسية: تمكنك من الاتصال بسطح المكتب البعيد (RDP) أو السيرفرات بأمان تام ودون الحاجة لفتح منافذ (Ports) في الراوتر أو المخاطرة بالتعرض للاختراق.
-السهولة والتحكم: تتميز المنصة بإمكانية تثبيتها وإعدادها خلال دقائق معدودة، وتوفر لوحة تحكم سحابية مرنة لإدارة الأجهزة المتصلة والصلاحيات بكل سهولة.
-
-فيديو الشرح التطبيقي
-إذا كنت تفضل الشرح المرئي خطوة بخطوة، يمكنك مشاهدة الفيديو الكامل من قناتنا على اليوتيوب لمعرفة مكان وضع هذه الأكواد بالتفصيل:
-
-
-الادوات المستخدمة ستجدها هنا 
-
-tailscale
-github
 name: RDP
+
 
 on:
   workflow_dispatch:
+
 
 jobs:
   secure-rdp:
     runs-on: windows-latest
     timeout-minutes: 3600
+
 
     steps:
       - name: Configure Core RDP Settings
@@ -74,6 +22,7 @@ jobs:
           Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' `
                              -Name "SecurityLayer" -Value 0 -Force
 
+
           # Remove any existing rule with the same name to avoid duplication
           netsh advfirewall firewall delete rule name="RDP-Tailscale"
           
@@ -81,8 +30,10 @@ jobs:
           netsh advfirewall firewall add rule name="RDP-Tailscale" `
             dir=in action=allow protocol=TCP localport=3389
 
+
           # (Optional) Restart the Remote Desktop service to ensure changes take effect
           Restart-Service -Name TermService -Force
+
 
       - name: Create RDP User with Secure Password
         run: |
@@ -112,6 +63,7 @@ jobs:
               exit 1
           }
 
+
       - name: Install Tailscale
         run: |
           $tsUrl = "https://pkgs.tailscale.com/stable/tailscale-setup-1.82.0-amd64.msi"
@@ -120,6 +72,7 @@ jobs:
           Invoke-WebRequest -Uri $tsUrl -OutFile $installerPath
           Start-Process msiexec.exe -ArgumentList "/i", "`"$installerPath`"", "/quiet", "/norestart" -Wait
           Remove-Item $installerPath -Force
+
 
       - name: Establish Tailscale Connection
         run: |
@@ -152,6 +105,7 @@ jobs:
               exit 1
           }
           Write-Host "TCP connectivity successful!"
+
 
       - name: Maintain Connection
         run: |
